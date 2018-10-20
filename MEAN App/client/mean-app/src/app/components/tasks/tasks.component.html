@@ -1,0 +1,30 @@
+<form action="" class="container" (submit)="addTask($event)">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Add Task Here.." name="title" [(ngModel)]="title">
+  </div>
+</form>
+<br>
+<div class="task-list">
+  <div *ngFor='let task of tasks' [@tasks]="tasks.length">
+  <div class="row">
+  <div class="col-md-1">
+    <input type="checkbox" name="check" id="checkbox" [checked]="task.isDone" (click)="updateStatus(task)">
+  </div>
+  <div class="col-md-7" *ngIf="!task.isUpdate">
+      {{task.title}}
+  </div>
+  <div class="col-md-7" *ngIf="task.isUpdate">
+    <input type="text" class="form-control" [placeholder]="task.title" name="updtTitle" [(ngModel)]="updtTitle">
+</div>
+  <div class="col-md-4">
+    <button value="delete" class="btn btn-danger" (click)="deleteTask(task._id)" *ngIf="true">Delete</button>
+    &nbsp;&nbsp;&nbsp;
+    <button value="update" class="btn btn-primary" (click)="updateTask(task)" *ngIf="!task.isUpdate">Update</button>
+    <button value="submit" class="btn btn-success" (click)="submitTask(task)" *ngIf="task.isUpdate">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button value="cancel" class="btn btn-warning" (click)="cancelTask(task)" *ngIf="task.isUpdate">Cancel</button>
+  </div>
+</div>
+<br>
+</div>
+</div>
